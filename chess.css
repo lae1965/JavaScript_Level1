@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: table;
+  margin: 20px auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  width: 11vh;
+  height: 11vh;
+  border: 1px solid #6b3535;
+  text-align: center;
+  font-size: 75px;
+}
+
+.digit,
+.letter td {
+  border: none;
+  background-color: lightgray;
+  font-size: 15px !important;
+  color: #6b3535;
+}
+
+.letter td {
+  height: 2.75vh;
+}
+
+.digit {
+  width: 2.75vh;
+}
+
+.reverce {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.bg-black {
+  background-color: #6b3535;
+}
+/*# sourceMappingURL=chess.css.map */

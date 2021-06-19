@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шахматы</title>
+    <link rel="stylesheet" href="chess.css">
+</head>
+
+<body>
+    <script>
+        /* Массив mass можно было и не создавать (предвижу замечание), и расставить все одним двойным (а можно и одинарным) for'ом, 
+        но если бы была задача написать игру, то я бы избрал тактику держать расположение фигур в виртуальном массиве и в нем делать 
+        все проверки возможности тех или иных ходов, а визуализацию делал бы по месту двумя маленькими функциями: убрать фигуру и 
+        поставить фигуру */
+
+        var letters = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'j', 'h', ''];
+        var blackFigures = ['&#9820;', '&#9822;', '&#9821;', '&#9819;', '&#9818;', '&#9821;', '&#9822;', '&#9820;'];
+        var whiteFigures = ['&#9814;', '&#9816;', '&#9815;', '&#9813;', '&#9812;', '&#9815;', '&#9816;', '&#9814;'];
+        var mass = [];
+        var symb;
+        for (var i = 0; i < 10; i++) {
+            for (var j = 0; j < 10; j++) {
+                if (i == 0 || i == 9) symb = letters[j];
+                else if (j == 0 || j == 9) symb = 9 - i;
+                else if (i == 1) symb = blackFigures[j - 1];
+                else if (i == 8) symb = whiteFigures[j - 1];
+                else if (i == 2) symb = '&#9823;';
+                else if (i == 7) symb = '&#9817;';
+                else symb = '';
+                mass[i * 10 + j] = symb;
+            }
+        }
+
+        var table = document.createElement("table");
+        document.getElementsByTagName("body")[0].appendChild(table);
+        for (var i = 0; i < 10; i++) {
+            var tr = document.createElement("tr");
+            if (i == 0 || i == 9) tr.classList.add("letter");
+            table.append(tr);
+            for (var j = 0; j < 10; j++) {
+                var td = document.createElement("td");
+                td.innerHTML = mass[i * 10 + j];
+                if (j == 0 || j == 9) td.classList.add("digit");
+                if (i == 0 || j == 9) td.classList.add("reverce");
+                if (i > 0 && i < 9 && j > 0 && j < 9 && (i % 2 != 0 && j % 2 == 0 || i % 2 == 0 && j % 2 != 0)) td.classList.add("bg-black");
+                tr.append(td);
+            }
+        }
+    </script>
+</body>
+
+</html>
