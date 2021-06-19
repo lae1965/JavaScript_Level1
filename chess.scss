@@ -1,0 +1,48 @@
+$len: 11vh;
+$color: rgb(107, 53, 53);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: table;
+    margin: 20px auto;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    width: $len;
+    height: $len;
+    border: 1px solid $color;
+    text-align: center;
+    font-size: 75px;
+}
+
+.digit,
+.letter td {
+    border: none;
+    background-color: lightgray;
+    font-size: 16px;
+    color: $color;
+}
+
+.letter td {
+    height: $len / 4;
+}
+
+.digit {
+    width: $len / 4;
+}
+
+.reverce {
+    transform: rotate(180deg);
+}
+
+.bg-black {
+    background-color: $color;
+}
