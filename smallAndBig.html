@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small and Big Image</title>
+    <style>
+        .border {
+            border: 1px solid black;
+        }
+
+        .container {
+            display: block;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex; justify-content: space-around; margin-top: 50px;">
+        <img src="SmallImg/image1.png" alt="image1" class="border">
+        <img src="SmallImg/image2.png" alt="image2" class="border">
+        <img src="SmallImg/image3.png" alt="image3" class="border">
+    </div>
+    <script>
+        var img = document.querySelectorAll("img");
+        for (var item of img) {
+            item.onclick = outputBigImage;
+        }
+
+        function outputBigImage(e) {
+            var bigImg = document.getElementById("big");
+            if (bigImg != null) bigImg.remove();
+            bigImg = document.createElement("img");
+            bigImg.id = "big";
+            bigImg.src = "BigImg/" + e.target.src.slice(e.target.src.lastIndexOf('/') + 1);
+            bigImg.alt = "Big";
+            bigImg.classList.add("border");
+            bigImg.classList.add("container");
+            document.body.append(bigImg);
+            bigImg.onerror = function () {
+                alert("Фото не найдено");
+                bigImg.remove();
+            }
+        }
+    </script>
+</body>
+
+</html>

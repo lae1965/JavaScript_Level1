@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+    <section class="cart container">
+        <h3 class="cart-heading no-display center" id="heading">Товары в корзине:</h3>
+        <div class="cart-title no-display" id="title">
+            <p class="width-5 center">Номер</p>
+            <p class="width-50 center">Наименование</p>
+            <p class="width-15 center">Количество</p>
+            <p class="width-15 center">Цена, руб.</p>
+            <p class="width-15 center">Стоимость, руб.</p>
+        </div>
+        <hr class="no-display" id="hr">
+    </section>
+    <div class="container border no-display" id="total" style="justify-content: flex-end;">
+        <p class="width-15 center">Итого на сумму:</p>
+        <p class="width-15 center" id="totalPrice"></p>
+    </div>
+    <section class="products container">
+        <h3 class="product-heading center">Наши товары:</h3>
+        <div class="product-content flex"></div>
+    </section>
+    <script>
+        var product = [{
+            name: "Брюки стрейч",
+            price: 1690
+        }, {
+            name: "Рубашка с коротким рукавом",
+            price: 1290
+        }, {
+            name: "Футболка поло в полоску",
+            price: 890
+        }];
+
+        var totalCast = 0;
+
+        function showTag(idName, flex) {
+            if (totalCast == 0) {
+                p = document.getElementById(idName);
+                p.classList.remove("no-display");
+                if (flex) p.classList.add("flex");
+            }
+        }
+
+        function product2cart(event) {
+            while (1) {
+                var num = parseInt(prompt("Введите количество (1 - 10):"));
+                if (!isNaN(num) && num > 0 && num < 11) break;
+                alert("Неверное значение. Попробуйте ещё раз.");
+            }
+            showTag("heading", false);
+            showTag("title", true);
+            showTag("hr", true);
+            var cart = document.getElementsByClassName("cart")[0];
+            var divTo = document.createElement("div");
+            divTo.classList.add("cart-item");
+            divTo.classList.add("flex");
+            cart.append(divTo);
+            var p = document.createElement("p");
+            p.classList.add("cart-item-number");
+            p.classList.add("center");
+            p.classList.add("width-5");
+            p.innerText = document.getElementsByClassName("cart-item").length; // Происваиваем порядковый номер
+            divTo.append(p);
+            var divFrom = event.target.parentNode.childNodes;
+            p = document.createElement("p");
+            p.classList.add("cart-item-name");
+            p.classList.add("center");
+            p.classList.add("width-50");
+            p.innerText = divFrom[0].innerText;                                 // Наименование товара
+            divTo.append(p);
+            p = document.createElement("p");
+            p.classList.add("cart-item-price");
+            p.classList.add("center");
+            p.classList.add("width-15");
+            p.innerText = num;                                                  // Количество                                 
+            divTo.append(p);
+            p = document.createElement("p");
+            p.classList.add("cart-item-price");
+            p.classList.add("center");
+            p.classList.add("width-15");
+            var price = +divFrom[2].innerText.split(' ')[0];
+            p.innerText = price;                                                // Цена                                 
+            divTo.append(p);
+            p = document.createElement("p");
+            p.classList.add("cart-item-cost");
+            p.classList.add("center");
+            p.classList.add("width-15");
+            p.innerText = price * num;                                          // Стоимость                                 
+            divTo.append(p);
+            showTag("total", true);
+            totalCast += price * num;
+            document.getElementById("totalPrice").innerText = totalCast;
+        }
+
+        for (var i = 0; i < 3; i++) {
+            var div = document.createElement("div");
+            div.classList.add("product-item");
+            document.getElementsByClassName("product-content")[0].append(div);
+            var h4 = document.createElement("h4");
+            h4.innerText = product[i].name;
+            h4.classList.add("product-name");
+            h4.classList.add("center");
+            div.append(h4);
+            var img = document.createElement("img");
+            img.src = "Img/image" + (i + 1) + ".jpg";
+            img.alt = "Image";
+            img.style.height = "300px";
+            div.append(img);
+            var p = document.createElement("p");
+            p.innerText = product[i].price + " руб.";
+            p.classList.add("product-price");
+            div.append(p);
+            var button = document.createElement("button");
+            button.innerText = "В корзину";
+            button.classList.add("product-button");
+            button.onclick = product2cart;
+            div.append(button);
+        }
+    </script>
+</body>
+
+</html>

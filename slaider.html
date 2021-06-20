@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдер</title>
+    <link rel="stylesheet" href="slaider.css">
+</head>
+
+<body>
+    <div class="main">
+        <button onclick="moveLeft()">&#9664;</button>
+        <img src="Img/image1.jpg" alt="image1" id="image-1" class="block">
+        <img src="Img/image2.jpg" alt="image2" id="image-2" class="hide">
+        <img src="Img/image3.jpg" alt="image3" id="image-3" class="hide">
+        <button onclick="moveRight()">&#9654;</button>
+    </div>
+
+    <script>
+        function changeClass(img, oldClass, newClass) {
+            img.classList.remove(oldClass);
+            img.classList.add(newClass);
+        }
+
+        function move(left) {
+            var img = document.getElementsByClassName("block")[0];
+            var num = +img.id.split('-')[1];
+            if (left) {
+                if (num == 1) num = 3;
+                else num--;
+            } else {
+                if (num == 3) num = 1;
+                else num++;
+            }
+            changeClass(img, "block", "hide");
+            img = document.getElementById("image-" + num);
+            changeClass(img, "hide", "block");
+
+        }
+
+        function moveLeft() {
+            move(true);
+        }
+
+        function moveRight() {
+            move(false);
+        }
+    </script>
+</body>
+
+</html>
